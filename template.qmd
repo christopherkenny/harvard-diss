@@ -16,6 +16,8 @@ abstract: |
   Write an abstract here which displays the contents that you want.
   More often than not, this will take a bit over a page.
   There are Quarto extensions which allow to write the abstract as normal text, rather than YAML.
+thanks: |
+  It is customary to include some form of acknowledgements to thank those who made this possible.
 ---
 
 ## Introduction
