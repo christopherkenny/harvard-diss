@@ -41,86 +41,98 @@
 
   set heading(numbering: sectionnumbering)
 
-  page([
+  page(
+    [
 
-    #set align(center)
+      #set align(center)
 
-    #if title != none {
-      set par(justify: false)
-      align(center)[#block(inset: 1em)[
-          #text(rgb("A51C30"), weight: "bold", size: 3em, hyphenate: false,
-          )[#title]
-        ]]
-    }
+      #if title != none {
+        set par(justify: false)
+        align(center)[#block(inset: 1em)[
+            #text(
+              rgb("A51C30"),
+              weight: "bold",
+              size: 3em,
+              hyphenate: false,
+            )[#title #label("title")]
+          ]]
+      }
 
-    #v(3fr)
+      #v(3fr)
 
-    #if authors != none {
-      upper("A dissertation presented")
-      linebreak()
-      upper("by")
-      linebreak()
-      upper(authors.first().name)
-      linebreak()
-      upper("to")
-      linebreak()
-      smallcaps(authors.first().department)
+      #if authors != none {
+        upper("A dissertation presented")
+        linebreak()
+        upper("by")
+        linebreak()
+        upper(authors.first().name)
+        linebreak()
+        upper("to")
+        linebreak()
+        smallcaps(authors.first().department)
 
-      v(2em)
+        v(2em)
 
-      upper([
-        In partial fulfillment of the requirements \
-        for the degree of \
-      ])
-      smallcaps("Doctor of Philosophy")
-      linebreak()
-      upper("in the subject of")
-      linebreak()
-      upper(degree-subject)
+        upper([
+          In partial fulfillment of the requirements \
+          for the degree of \
+        ])
+        smallcaps("Doctor of Philosophy")
+        linebreak()
+        upper("in the subject of")
+        linebreak()
+        upper(degree-subject)
 
-    v(2em)
+        v(2em)
 
-    smallcaps(authors.first().university)
-    linebreak()
-    smallcaps(authors.first().location)
-    linebreak()
-    }
+        smallcaps(authors.first().university)
+        linebreak()
+        smallcaps(authors.first().location)
+        linebreak()
+      }
 
-    #if date != none {
-      date.display("[month repr:long] [year]")
-    }
+      #if date != none {
+        date.display("[month repr:long] [year]")
+      }
 
-    #v(1fr)
-  ], numbering: none)
+      #v(1fr)
+    ],
+    numbering: none,
+  )
 
   if copyright != none {
-    page([
-      #set align(left + horizon)
-      #set par(leading: 0.65em)
-      #copyright
-    ], numbering: none)
+    page(
+      [
+        #set align(left + horizon)
+        #set par(leading: 0.65em)
+        #copyright<copyright>
+      ],
+      numbering: none,
+    )
   }
 
   if abstract != none {
-    set page(
-      header: [
-        Dissertation advisor: #dissertation-advisor
-        #h(1fr)
-        #authors.first().name
-      ]
-    )
+    set page(header: [
+      Dissertation advisor: #dissertation-advisor
+      #h(1fr)
+      #authors.first().name
+    ])
 
     set par(justify: false)
     align(center)[
       #block(inset: 1em)[
-          #text(rgb("A51C30"), weight: "bold", size: 1.75em, hyphenate: false,
-          )[#title]
-    ]
+        #text(
+          rgb("A51C30"),
+          weight: "bold",
+          size: 1.75em,
+          hyphenate: false,
+        )[#title]
+      ]
     ]
 
     align(center)[
       #block(inset: 1em)[
-        #smallcaps(text(weight: "semibold", size: 1.25em)[#abstract-title])
+        #smallcaps(text(weight: "semibold", size: 1.25em)[#abstract-title #label("abstract")])
       ]
     ]
 
@@ -143,16 +155,45 @@
       toc_title
     }
 
-    block(above: 0em, below: 2em)[
-      #show outline: it => {
-        show heading: set align(right)
-        it
+    block(above: 1em, below: 2em)[
+      #show heading: set align(right)
+      #align(right)[#text(
+          rgb("A51C30"),
+          weight: "bold",
+          size: 1.5em,
+          hyphenate: false,
+        )[#toc_title #label("toc")]]
+
+      #context {
+
+        let custom_labels = ("title", "copyright", "abstract", "toc")
+        let custom_text = ("Title Page", "Copyright",
+        "Abstract", "Table of Contents")
+
+        for i in array.range(custom_labels.len()) {
+          let lbl = custom_labels.at(i)
+          let loc = locate(label(lbl))
+          // in typst > 0.13, this should be simplifieds
+          let nr = numbering("i", loc.page())
+          [#custom_text.at(i) #h(1fr) #nr \ ]
+        }
+
+        let chapters = query(
+          heading.where(
+            level: 1,
+            outlined: true,
+          ),
+        )
+        for chapter in chapters {
+          let loc = chapter.location()
+          let nr = numbering(
+            loc.page-numbering(),
+            ..counter(page).at(loc),
+          )
+          [#chapter.body #h(1fr) #nr \ ]
+        }
       }
-      #outline(
-        title: toc_title,
-        depth: toc_depth,
-        indent: toc_indent,
-      )
+
     ]
   }
 
