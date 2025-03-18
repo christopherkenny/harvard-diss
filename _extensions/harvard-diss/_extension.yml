@@ -1,0 +1,13 @@
+title: harvard-diss
+author: Christopher T. Kenny
+version: 1.0.0
+quarto-required: ">=1.6.0"
+contributes:
+  formats:
+    typst:
+      template-partials:
+        - typst-template.typ
+        - typst-show.typ
+      mainfont:
+        - EB Garamond
+      toc-title: "Contents"
