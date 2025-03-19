@@ -156,6 +156,7 @@
     }
 
     block(above: 1em, below: 2em)[
+      #set par(leading: 2 * 0.65em)
       #show heading: set align(right)
       #align(right)[#text(
           rgb("A51C30"),
@@ -165,7 +166,6 @@
         )[#toc_title #label("toc")]]
 
       #context {
-
         let custom_labels = ("title", "copyright", "abstract", "toc")
         let custom_text = ("Title Page", "Copyright",
         "Abstract", "Table of Contents")
