@@ -158,10 +158,11 @@
     block(above: 1em, below: 2em)[
       #set par(leading: 2 * 0.65em)
       #show heading: set align(right)
+      #v(5em)
       #align(right)[#text(
           rgb("A51C30"),
           weight: "bold",
-          size: 1.5em,
+          size: 3em,
           hyphenate: false,
         )[#toc_title #label("toc")]]
 
@@ -175,7 +176,7 @@
           let loc = locate(label(lbl))
           // in typst > 0.13, this should be simplifieds
           let nr = numbering("i", loc.page())
-          [#custom_text.at(i) #h(1fr) #nr \ ]
+          [#smallcaps(custom_text.at(i)) #h(1fr) #nr \ ]
         }
 
         let chapters = query(
@@ -190,7 +191,7 @@
             loc.page-numbering(),
             ..counter(page).at(loc),
           )
-          [#chapter.body #h(1fr) #nr \ ]
+          [#smallcaps(chapter.body) #h(1fr) #nr \ ]
         }
       }
 
