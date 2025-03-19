@@ -21,6 +21,7 @@
   dissertation-advisor: none,
   degree-subject: none,
   thanks: none,
+  dedication: none,
   doc,
 ) = {
   set page(
@@ -181,7 +182,8 @@
           "copyright",
           "abstract",
           "toc",
-          "thanks"
+          "thanks",
+          "dedication"
         )
         let custom_text = (
           "Title Page",
@@ -189,6 +191,7 @@
           "Abstract",
           "Table of Contents",
           "Acknowledgements",
+          "Dedication"
         )
 
         for i in array.range(custom_labels.len()) {
@@ -203,7 +206,7 @@
           let loc = locate(lbl)
           // in typst > 0.13, this should be simplified
           let num = numbering("i", loc.page())
-          [#smallcaps(custom_text.at(i)) #h(1fr) #num \ ]
+          [#smallcaps(custom_text.at(i)) #box(width: 1fr, repeat[.]) #num \ ]
         }
 
         let chapters = query(
@@ -219,7 +222,7 @@
             loc.page-numbering(),
             ..counter(page).at(loc),
           )
-          [#smallcaps(chapter.body) #h(1fr) #num \ ]
+          [#smallcaps(chapter.body) #box(width: 1fr, repeat[.]) #num \ ]
         }
       }
     ]
@@ -248,6 +251,20 @@
   // glossary
   // epigraph
   // dedication
+  if dedication != none {
+    v(5em)
+    align(right)[
+      #text(
+        rgb("A51C30"),
+        weight: "bold",
+        size: 3em,
+        hyphenate: false,
+      )[Dedication #label("dedication")]]
+    linebreak()
+    show text: emph
+    dedication
+    pagebreak()
+  }
 
 
   // The rest of the doc

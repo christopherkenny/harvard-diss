@@ -76,5 +76,8 @@ $endif$
 $if(thanks)$
   thanks: [$thanks$],
 $endif$
+$if(dedication)$
+  dedication: [$dedication$],
+$endif$
   doc,
 )

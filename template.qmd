@@ -18,6 +18,7 @@ abstract: |
   There are Quarto extensions which allow to write the abstract as normal text, rather than YAML.
 thanks: |
   It is customary to include some form of acknowledgements to thank those who made this possible.
+dedication: To Coda and Tibble, without whom this dissertation would never have been completed.
 ---
 
 ## Introduction
