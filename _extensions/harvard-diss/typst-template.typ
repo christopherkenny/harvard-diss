@@ -65,7 +65,7 @@
           ]]
       }
 
-      #v(3fr)
+      #v(4fr)
 
       #if authors != none {
         upper("A dissertation presented")
