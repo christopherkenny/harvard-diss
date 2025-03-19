@@ -20,6 +20,7 @@
   copyright: none,
   dissertation-advisor: none,
   degree-subject: none,
+  thanks: none,
   doc,
 ) = {
   set page(
@@ -28,7 +29,14 @@
     numbering: "i",
   )
 
-  show heading: set text(rgb("A51C30"))
+  show heading: it => [
+    #set text(rgb("A51C30"), weight: "bold",
+              size: 2em, hyphenate: false)
+    #set align(right)
+    #it.numbering
+    #linebreak()
+    #smallcaps(it.body)
+  ]
 
   set par(justify: true)
 
@@ -43,7 +51,6 @@
 
   page(
     [
-
       #set align(center)
 
       #if title != none {
@@ -120,14 +127,12 @@
 
     set par(justify: false)
     align(center)[
-      #block(inset: 1em)[
         #text(
           rgb("A51C30"),
           weight: "bold",
           size: 1.75em,
           hyphenate: false,
         )[#title]
-      ]
     ]
 
     align(center)[
@@ -167,13 +172,20 @@
         )[#toc_title #label("toc")]]
 
       #context {
-        let custom_labels = ("title", "copyright", "abstract", "toc")
+        let custom_labels = ("title", "copyright", "abstract", "toc", "thanks")
         let custom_text = ("Title Page", "Copyright",
-        "Abstract", "Table of Contents")
+        "Abstract", "Table of Contents", "Acknowledgements")
 
         for i in array.range(custom_labels.len()) {
-          let lbl = custom_labels.at(i)
-          let loc = locate(label(lbl))
+          let lbl = label(custom_labels.at(i))
+
+          // if a label isn't used, skip it.
+          // allows pieces to be missing (e.g. no abstract yet)
+          if (query(lbl).len() == 0) {
+            continue
+          }
+
+          let loc = locate(lbl)
           // in typst > 0.13, this should be simplifieds
           let nr = numbering("i", loc.page())
           [#smallcaps(custom_text.at(i)) #h(1fr) #nr \ ]
@@ -194,9 +206,33 @@
           [#smallcaps(chapter.body) #h(1fr) #nr \ ]
         }
       }
-
     ]
+
+    pagebreak()
   }
+
+  // FRONTMATTER ----
+  // list of figures
+  // list of tables
+  // citations to previous work
+  // acknowledgements "thanks"
+  if thanks != none {
+    v(5em)
+    align(right)[
+      #text(
+          rgb("A51C30"),
+          weight: "bold",
+          size: 3em,
+          hyphenate: false,
+        )[Acknowledgements #label("thanks")]]
+
+    thanks
+    pagebreak()
+  }
+  // glossary
+  // epigraph
+  // dedication
+
 
   // The rest of the doc
   set page(numbering: "1")
@@ -207,6 +243,8 @@
   } else {
     columns(cols, doc)
   }
+
+  // BACKMATTER ----
 }
 
 #set table(

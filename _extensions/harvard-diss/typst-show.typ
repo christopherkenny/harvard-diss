@@ -73,5 +73,8 @@ $endif$
 $if(degree-subject)$
   degree-subject: "$degree-subject$",
 $endif$
+$if(thanks)$
+  thanks: [$thanks$],
+$endif$
   doc,
 )

@@ -12,3 +12,4 @@ contributes:
         - EB Garamond
       fontsize: 12pt
       toc-title: "Contents"
+      section-numbering: "1"
