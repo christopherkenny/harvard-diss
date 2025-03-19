@@ -30,16 +30,7 @@
   )
 
   show heading.where(level: 1): it => [
-    #metadata("heading-metadata")
-    #context {
-      let m = query(metadata.where(value: "heading-metadata").before(
-          here(),
-        )).last()
-      if m.location().position().y > 90pt {
-        // 90pt = header + size of text
-        pagebreak()
-      }
-    }
+    #pagebreak(weak: true)
     #set text(rgb("A51C30"), weight: "bold", size: 2em, hyphenate: false)
     #set align(right)
     #text(counter(heading).display(it.numbering), size: 3em)
@@ -176,7 +167,6 @@
 
     block(above: 1em, below: 2em)[
       #set par(leading: 2 * 0.65em)
-      #show heading: set align(right)
       #v(5em)
       #align(right)[#text(
           rgb("A51C30"),
@@ -186,7 +176,13 @@
         )[#toc_title #label("toc")]]
 
       #context {
-        let custom_labels = ("title", "copyright", "abstract", "toc", "thanks")
+        let custom_labels = (
+          "title",
+          "copyright",
+          "abstract",
+          "toc",
+          "thanks"
+        )
         let custom_text = (
           "Title Page",
           "Copyright",
@@ -219,7 +215,6 @@
 
         for chapter in chapters {
           let loc = chapter.location()
-          repr(loc.position())
           let num = numbering(
             loc.page-numbering(),
             ..counter(page).at(loc),
