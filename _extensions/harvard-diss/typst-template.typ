@@ -32,13 +32,15 @@
   show heading.where(level: 1): it => [
     #metadata("heading-metadata")
     #context {
-      let m = query(metadata.where(value: "heading-metadata").before(here())).last()
-      if m.location().position().y > 90pt { // 90pt = header + size of text
+      let m = query(metadata.where(value: "heading-metadata").before(
+          here(),
+        )).last()
+      if m.location().position().y > 90pt {
+        // 90pt = header + size of text
         pagebreak()
       }
     }
-    #set text(rgb("A51C30"), weight: "bold",
-              size: 2em, hyphenate: false)
+    #set text(rgb("A51C30"), weight: "bold", size: 2em, hyphenate: false)
     #set align(right)
     #text(counter(heading).display(it.numbering), size: 3em)
     #linebreak()
@@ -134,17 +136,22 @@
 
     set par(justify: false)
     align(center)[
-        #text(
-          rgb("A51C30"),
-          weight: "bold",
-          size: 1.75em,
-          hyphenate: false,
-        )[#title]
+      #text(
+        rgb("A51C30"),
+        weight: "bold",
+        size: 1.75em,
+        hyphenate: false,
+      )[#title]
     ]
 
     align(center)[
       #block(inset: 1em)[
-        #smallcaps(text(weight: "semibold", size: 1.25em)[#abstract-title #label("abstract")])
+        #smallcaps(
+          text(
+            weight: "semibold",
+            size: 1.25em,
+          )[#abstract-title #label("abstract")],
+        )
       ]
     ]
 
@@ -180,8 +187,13 @@
 
       #context {
         let custom_labels = ("title", "copyright", "abstract", "toc", "thanks")
-        let custom_text = ("Title Page", "Copyright",
-        "Abstract", "Table of Contents", "Acknowledgements")
+        let custom_text = (
+          "Title Page",
+          "Copyright",
+          "Abstract",
+          "Table of Contents",
+          "Acknowledgements",
+        )
 
         for i in array.range(custom_labels.len()) {
           let lbl = label(custom_labels.at(i))
@@ -193,9 +205,9 @@
           }
 
           let loc = locate(lbl)
-          // in typst > 0.13, this should be simplifieds
-          let nr = numbering("i", loc.page())
-          [#smallcaps(custom_text.at(i)) #h(1fr) #nr \ ]
+          // in typst > 0.13, this should be simplified
+          let num = numbering("i", loc.page())
+          [#smallcaps(custom_text.at(i)) #h(1fr) #num \ ]
         }
 
         let chapters = query(
@@ -204,13 +216,15 @@
             outlined: true,
           ),
         )
+
         for chapter in chapters {
           let loc = chapter.location()
-          let nr = numbering(
+          repr(loc.position())
+          let num = numbering(
             loc.page-numbering(),
             ..counter(page).at(loc),
           )
-          [#smallcaps(chapter.body) #h(1fr) #nr \ ]
+          [#smallcaps(chapter.body) #h(1fr) #num \ ]
         }
       }
     ]
@@ -227,11 +241,11 @@
     v(5em)
     align(right)[
       #text(
-          rgb("A51C30"),
-          weight: "bold",
-          size: 3em,
-          hyphenate: false,
-        )[Acknowledgements #label("thanks")]]
+        rgb("A51C30"),
+        weight: "bold",
+        size: 3em,
+        hyphenate: false,
+      )[Acknowledgements #label("thanks")]]
 
     thanks
     pagebreak()
