@@ -29,11 +29,18 @@
     numbering: "i",
   )
 
-  show heading: it => [
+  show heading.where(level: 1): it => [
+    #metadata("heading-metadata")
+    #context {
+      let m = query(metadata.where(value: "heading-metadata").before(here())).last()
+      if m.location().position().y > 90pt { // 90pt = header + size of text
+        pagebreak()
+      }
+    }
     #set text(rgb("A51C30"), weight: "bold",
               size: 2em, hyphenate: false)
     #set align(right)
-    #it.numbering
+    #text(counter(heading).display(it.numbering), size: 3em)
     #linebreak()
     #smallcaps(it.body)
   ]
