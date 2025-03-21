@@ -79,5 +79,11 @@ $endif$
 $if(dedication)$
   dedication: [$dedication$],
 $endif$
+$if(epigraph)$
+  epigraph: [$epigraph$],
+$endif$
+$if(epigraph-author)$
+  epigraph-author: [$epigraph-author$],
+$endif$
   doc,
 )

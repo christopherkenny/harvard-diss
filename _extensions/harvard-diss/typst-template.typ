@@ -22,6 +22,8 @@
   degree-subject: none,
   thanks: none,
   dedication: none,
+  epigraph: none,
+  epigraph-author: none,
   doc,
 ) = {
   set page(
@@ -183,7 +185,8 @@
           "abstract",
           "toc",
           "thanks",
-          "dedication"
+          "dedication",
+          "epigraph"
         )
         let custom_text = (
           "Title Page",
@@ -191,7 +194,8 @@
           "Abstract",
           "Table of Contents",
           "Acknowledgements",
-          "Dedication"
+          "Dedication",
+          "Epigraph"
         )
 
         for i in array.range(custom_labels.len()) {
@@ -244,12 +248,30 @@
         size: 3em,
         hyphenate: false,
       )[Acknowledgements #label("thanks")]]
-
+    linebreak()
     thanks
     pagebreak()
   }
   // glossary
   // epigraph
+  if epigraph != none {
+    v(5em)
+    align(right)[
+      #text(
+        rgb("A51C30"),
+        weight: "bold",
+        size: 3em,
+        hyphenate: false,
+      )[Epigraph #label("epigraph")]]
+    linebreak()
+    show text: emph
+    align(right, block(align(left)[
+      #epigraph
+    ]))
+    align(right)[--- #epigraph-author]
+    pagebreak()
+  }
+  
   // dedication
   if dedication != none {
     v(5em)
