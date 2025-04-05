@@ -1,4 +1,17 @@
 
+#let ch-header(ttl, lbl) = {
+  v(5em)
+  align(right)[
+    #text(
+      rgb("A51C30"),
+      weight: "bold",
+      size: 3em,
+      hyphenate: false,
+    )[#ttl #label(lbl)]]
+  linebreak()
+}
+
+
 #let article(
   title: none,
   authors: none,
@@ -196,7 +209,7 @@
           "dedication",
           "epigraph",
           "list-fig",
-          "list-tab"
+          "list-tab",
         )
         let custom_text = (
           "Title Page",
@@ -208,7 +221,7 @@
           "Dedication",
           "Epigraph",
           "List of Figures",
-          "List of Tables"
+          "List of Tables",
         )
 
         for i in array.range(custom_labels.len()) {
@@ -263,43 +276,20 @@
   // FRONTMATTER ----
   // citations to previous work
   if previous-work != none {
-    v(5em)
-    align(right)[
-      #text(
-        rgb("A51C30"),
-        weight: "bold",
-        size: 3em,
-        hyphenate: false,
-      )[Citations to Previous Work #label("prev-work")]]
-      linebreak()
-      previous-work
-      pagebreak()
+    ch-header("Citations to Previous Work", "prev-work")
+    previous-work
+    pagebreak()
   }
   // acknowledgements "thanks"
   if thanks != none {
-    v(5em)
-    align(right)[
-      #text(
-        rgb("A51C30"),
-        weight: "bold",
-        size: 3em,
-        hyphenate: false,
-      )[Acknowledgements #label("thanks")]]
-    linebreak()
+    ch-header("Acknowledgements", "thanks")
     thanks
     pagebreak()
   }
 
   // list of figures
   if list-of-figures != none and list-of-figures {
-    align(right)[
-      #text(
-        rgb("A51C30"),
-        weight: "bold",
-        size: 3em,
-        hyphenate: false,
-      )[List of Figures #label("list-fig")]]
-    linebreak()
+    ch-header("List of Figures", "list-fig")
 
     outline(
       title: none,
@@ -310,15 +300,8 @@
   }
 
   // list of tables
-    if list-of-tables != none and list-of-tables {
-    align(right)[
-      #text(
-        rgb("A51C30"),
-        weight: "bold",
-        size: 3em,
-        hyphenate: false,
-      )[List of Tables #label("list-tab")]]
-    linebreak()
+  if list-of-tables != none and list-of-tables {
+    ch-header("List of Tables", "list-tab")
 
     outline(
       title: none,
@@ -331,36 +314,29 @@
   // glossary
   // epigraph
   if epigraph != none {
-    v(5em)
-    align(right)[
-      #text(
-        rgb("A51C30"),
-        weight: "bold",
-        size: 3em,
-        hyphenate: false,
-      )[Epigraph #label("epigraph")]]
-    linebreak()
+    ch-header("Epigraph", "epigraph")
+
     show text: emph
-    align(right, block(align(left)[
-      #epigraph
-    ]))
+    align(
+      right,
+      block(
+        align(left)[
+          #epigraph
+        ],
+      ),
+    )
     align(right)[--- #epigraph-author]
+
     pagebreak()
   }
 
   // dedication
   if dedication != none {
-    v(5em)
-    align(right)[
-      #text(
-        rgb("A51C30"),
-        weight: "bold",
-        size: 3em,
-        hyphenate: false,
-      )[Dedication #label("dedication")]]
-    linebreak()
+    ch-header("Dedication", "dedication")
+
     show text: emph
     dedication
+
     pagebreak()
   }
 
