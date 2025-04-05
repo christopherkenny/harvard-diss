@@ -191,6 +191,7 @@
           "copyright",
           "abstract",
           "toc",
+          "prev-work",
           "thanks",
           "dedication",
           "epigraph",
@@ -202,6 +203,7 @@
           "Copyright",
           "Abstract",
           "Table of Contents",
+          "Citations to Previous Work",
           "Acknowledgements",
           "Dedication",
           "Epigraph",
@@ -231,13 +233,26 @@
           ),
         )
 
+        let prev_num = -1
+
         for chapter in chapters {
           let loc = chapter.location()
           let num = numbering(
             loc.page-numbering(),
             ..counter(page).at(loc),
           )
-          [#smallcaps(chapter.body) #box(width: 1fr, repeat[.]) #num \ ]
+          let ch_num = counter(heading).at(loc).at(0)
+          if ch_num == prev_num {
+            ch_num = none
+          } else {
+            prev_num = ch_num
+          }
+          [
+            #if ch_num != none {
+              str(ch_num) + "   "
+            }
+            #smallcaps(chapter.body) #box(width: 1fr, repeat[.]) #num \
+          ]
         }
       }
     ]
@@ -255,7 +270,7 @@
         weight: "bold",
         size: 3em,
         hyphenate: false,
-      )[Citations to Previous Work #label("prevwork")]]
+      )[Citations to Previous Work #label("prev-work")]]
       linebreak()
       previous-work
       pagebreak()
