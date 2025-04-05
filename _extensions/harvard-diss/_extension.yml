@@ -9,6 +9,8 @@ contributes:
         - typst-template.typ
         - typst-show.typ
         - biblio.typ
+      filters:
+        - special-sections.lua
       mainfont:
         - EB Garamond
       fontsize: 12pt

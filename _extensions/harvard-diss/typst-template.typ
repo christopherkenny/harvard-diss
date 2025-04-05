@@ -354,6 +354,24 @@
   // BACKMATTER ----
 }
 
+#let appendix(body) = {
+  set heading(
+    numbering: "A",
+    supplement: [Appendix]
+    )
+  set figure(
+    numbering: (..nums) => {
+      "A" + numbering("1", ..nums.pos())
+    },
+    supplement: [Appendix Figure]
+  )
+  counter(heading).update(0)
+  counter(figure.where(kind: "quarto-float-fig")).update(0)
+  counter(figure.where(kind: "quarto-float-tbl")).update(0)
+
+  body
+}
+
 #set table(
   inset: 6pt,
   stroke: none,
