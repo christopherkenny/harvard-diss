@@ -43,7 +43,7 @@ This format supports two types of special sections: the `introduction` and the `
 
 To properly format the dissertation, install [EB Garamond](https://fonts.google.com/specimen/EB+Garamond).
 
-There are other options, listed [here], which can be used. To change the font, use the `mainfont` and `fontsize` parameters in the Quarto YAML.
+There are other options, listed [here](https://gsas.harvard.edu/resource/dissertation-formatting-guidance), which can be used. To change the font, use the `mainfont` and `fontsize` parameters in the Quarto YAML.
 
 
 ## License
