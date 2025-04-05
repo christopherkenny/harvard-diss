@@ -32,7 +32,12 @@ Some options you can set:
 - `list-tables`: Should a list of tables be provided at the start?
 - `biblio-title`: Title of the bibliography (default: "References")
 
+### Special Sections
 
+This format supports two types of special sections: the `introduction` and the `appendix`. These get special handling as follows:
+
+- `introduction`: This sets the introduction section to be chapter "0".
+- `appendix`: This sets counters to use "A" numbering, rather than "1" numbering.
 
 ### Fonts
 
@@ -42,3 +47,5 @@ There are other options, listed [here], which can be used. To change the font, u
 
 
 ## License
+
+This template is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
