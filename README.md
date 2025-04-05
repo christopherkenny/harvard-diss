@@ -24,11 +24,13 @@ Some options you can set:
 - `dissertation-advisor`: Name of the dissertation committee chair or co-chairs
 - `degree-subject`: Subject of the PhD to include (e.g., "Government")
 - `thanks`: Acknowledgements to include at the start of the thesis
+- `previous-work`: Citations to previous work, with about one sentence of detail and an inline `@citekey` style citation.
 - `dedication`: Dedication of the thesis
 - `epigraph`: A quote to include at the start of the thesis
 - `epigraph-author`: The author of the quote
 - `list-figures`: Should a list of figures be provided at the start?
 - `list-tables`: Should a list of tables be provided at the start?
+- `biblio-title`: Title of the bibliography (default: "References")
 
 
 

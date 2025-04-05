@@ -20,6 +20,7 @@
   copyright: none,
   dissertation-advisor: none,
   degree-subject: none,
+  previous-work: none,
   thanks: none,
   dedication: none,
   epigraph: none,
@@ -38,7 +39,11 @@
     #pagebreak(weak: true)
     #set text(rgb("A51C30"), weight: "bold", size: 2em, hyphenate: false)
     #set align(right)
-    #text(counter(heading).display(it.numbering), size: 3em)
+    #if it.numbering != none {
+      text(counter(heading).display(it.numbering), size: 3em)
+    } else {
+      v(3em)
+    }
     #linebreak()
     #smallcaps(it.body)
   ]
@@ -242,6 +247,19 @@
 
   // FRONTMATTER ----
   // citations to previous work
+  if previous-work != none {
+    v(5em)
+    align(right)[
+      #text(
+        rgb("A51C30"),
+        weight: "bold",
+        size: 3em,
+        hyphenate: false,
+      )[Citations to Previous Work #label("prevwork")]]
+      linebreak()
+      previous-work
+      pagebreak()
+  }
   // acknowledgements "thanks"
   if thanks != none {
     v(5em)

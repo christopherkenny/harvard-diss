@@ -9,6 +9,7 @@ author:
       - name: Harvard University
         department: The Department of Government
         city: Cambridge, Massachusetts
+bibliography: bibliography.bib
 copyright-text: "© 2025 --- Christopher T. Kenny. All rights reserved."
 dissertation-advisor: "Professor Kosuke Imai"
 degree-subject: Government
@@ -27,6 +28,10 @@ epigraph: |
 epigraph-author: "Thomas Hofeller"
 list-figures: true
 list-tables: true
+previous-work: |
+  Chapter 1 is ...
+
+  Chapter 2 is drawn from @mccartan2024redistricting.
 ---
 
 ## Introduction

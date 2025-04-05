@@ -8,8 +8,11 @@ contributes:
       template-partials:
         - typst-template.typ
         - typst-show.typ
+        - biblio.typ
       mainfont:
         - EB Garamond
       fontsize: 12pt
       toc-title: "Contents"
       section-numbering: "1"
+      biblio-title: "References"
+      bibliographystyle: "chicago-author-date"

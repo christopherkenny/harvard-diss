@@ -73,6 +73,9 @@ $endif$
 $if(degree-subject)$
   degree-subject: "$degree-subject$",
 $endif$
+$if(previous-work)$
+  previous-work: [$previous-work$],
+$endif$
 $if(thanks)$
   thanks: [$thanks$],
 $endif$
