@@ -20,11 +20,13 @@ thanks: |
   It is customary to include some form of acknowledgements to thank those who made this possible.
 dedication: To Coda and Tibble, without whom this dissertation would never have been completed.
 epigraph: |
-  | Redistricting is like an election in reverse. 
-  | It's a great event. 
-  | Usually the voters get to pick the politicians. 
-  | In redistricting, the politicians get to pick the voters. 
+  | Redistricting is like an election in reverse.
+  | It's a great event.
+  | Usually the voters get to pick the politicians.
+  | In redistricting, the politicians get to pick the voters.
 epigraph-author: "Thomas Hofeller"
+list-figures: true
+list-tables: true
 ---
 
 ## Introduction

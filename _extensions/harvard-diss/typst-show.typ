@@ -85,5 +85,11 @@ $endif$
 $if(epigraph-author)$
   epigraph-author: [$epigraph-author$],
 $endif$
+$if(list-figures)$
+  list-of-figures: $list-figures$,
+$endif$
+$if(list-tables)$
+  list-of-tables: $list-tables$,
+$endif$
   doc,
 )

@@ -24,6 +24,8 @@
   dedication: none,
   epigraph: none,
   epigraph-author: none,
+  list-of-figures: none,
+  list-of-tables: none,
   doc,
 ) = {
   set page(
@@ -186,7 +188,9 @@
           "toc",
           "thanks",
           "dedication",
-          "epigraph"
+          "epigraph",
+          "list-fig",
+          "list-tab"
         )
         let custom_text = (
           "Title Page",
@@ -195,7 +199,9 @@
           "Table of Contents",
           "Acknowledgements",
           "Dedication",
-          "Epigraph"
+          "Epigraph",
+          "List of Figures",
+          "List of Tables"
         )
 
         for i in array.range(custom_labels.len()) {
@@ -235,8 +241,6 @@
   }
 
   // FRONTMATTER ----
-  // list of figures
-  // list of tables
   // citations to previous work
   // acknowledgements "thanks"
   if thanks != none {
@@ -252,6 +256,45 @@
     thanks
     pagebreak()
   }
+
+  // list of figures
+  if list-of-figures != none and list-of-figures {
+    align(right)[
+      #text(
+        rgb("A51C30"),
+        weight: "bold",
+        size: 3em,
+        hyphenate: false,
+      )[List of Figures #label("list-fig")]]
+    linebreak()
+
+    outline(
+      title: none,
+      target: figure.where(kind: "quarto-float-fig"),
+    )
+
+    pagebreak()
+  }
+
+  // list of tables
+    if list-of-tables != none and list-of-tables {
+    align(right)[
+      #text(
+        rgb("A51C30"),
+        weight: "bold",
+        size: 3em,
+        hyphenate: false,
+      )[List of Tables #label("list-tab")]]
+    linebreak()
+
+    outline(
+      title: none,
+      target: figure.where(kind: "quarto-float-tbl"),
+    )
+
+    pagebreak()
+  }
+
   // glossary
   // epigraph
   if epigraph != none {
@@ -271,7 +314,7 @@
     align(right)[--- #epigraph-author]
     pagebreak()
   }
-  
+
   // dedication
   if dedication != none {
     v(5em)
