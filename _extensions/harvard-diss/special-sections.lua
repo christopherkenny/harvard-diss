@@ -13,7 +13,7 @@ end
 function Pandoc(doc)
     for i, el in pairs(doc.blocks) do
         if (in_table(el.classes, "introduction")) then
-            table.insert(doc.blocks, i, pandoc.RawInline("typst", "#counter(heading).update(0)\n"))
+            table.insert(doc.blocks, i, pandoc.RawInline("typst", "#set heading(numbering: (n1, ..x) => numbering(\"1\", n1 - 1, ..x))\n"))
             break
         end
     end

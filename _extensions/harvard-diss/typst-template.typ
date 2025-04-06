@@ -249,16 +249,23 @@
         let prev_num = -1
 
         for chapter in chapters {
+
           let loc = chapter.location()
           let num = numbering(
             loc.page-numbering(),
             ..counter(page).at(loc),
           )
+
           let ch_num = counter(heading).at(loc).at(0)
           if ch_num == prev_num {
             ch_num = none
           } else {
             prev_num = ch_num
+            // needed to # properly (special 0 + appendix A)
+            ch_num = numbering(
+              chapter.numbering,
+              ch_num
+            )
           }
           [
             #if ch_num != none {
