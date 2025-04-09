@@ -1,3 +1,6 @@
+> [!WARNING]  
+> This extension may not be ready for wider use. I am currently using it for my own dissertation and it may change without warning.
+
 # `harvard-diss` Format
 
 This template provides a Typst-powered Quarto template to comply with Harvard's dissertation guidelines.
