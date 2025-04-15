@@ -268,7 +268,11 @@
           let loc = locate(lbl)
           // in typst > 0.13, this should be simplified
           let num = numbering("i", loc.page())
-          [#smallcaps(custom_text.at(i)) #box(width: 1fr, repeat[.]) #num \ ]
+          link(
+            loc,
+            [#smallcaps(custom_text.at(i)) #box(width: 1fr, repeat[.]) #num \ ]
+          )
+
         }
 
         let chapters = query(
@@ -301,12 +305,18 @@
               )
             }
           }
-          [
+
+          link(
+            loc,
+                      [
             #if ch_num != none {
               str(ch_num) + "   "
             }
             #smallcaps(chapter.body) #box(width: 1fr, repeat[.]) #num \
           ]
+
+          )
+
         }
       }
     ]
