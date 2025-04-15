@@ -10,6 +10,12 @@ $elseif(bibliographystyle)$
 $endif$
 $if(bibliography)$
 
+#set par(
+  first-line-indent: 0em,
+  hanging-indent: 0em,
+  leading: 0.65em
+)
+
 #set bibliography(
   title: "$biblio-title$"
 )

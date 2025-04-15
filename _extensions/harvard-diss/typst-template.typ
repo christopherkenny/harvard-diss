@@ -1,6 +1,7 @@
 
 #let ch-header(ttl, lbl) = {
   v(5em)
+  set par(leading: 0.65em, justify: false)
   align(right)[
     #text(
       rgb("A51C30"),
@@ -9,6 +10,18 @@
       hyphenate: false,
     )[#ttl #label(lbl)]]
   linebreak()
+}
+
+#let to-string(content) = {
+  if content.has("text") {
+    content.text
+  } else if content.has("children") {
+    content.children.map(to-string).join("")
+  } else if content.has("body") {
+    to-string(content.body)
+  } else if content == [ ] {
+    " "
+  }
 }
 
 
@@ -30,6 +43,8 @@
   toc_title: none,
   toc_depth: none,
   toc_indent: 1.5em,
+  linestretch: 1,
+  linkcolor: "#800000",
   copyright: none,
   dissertation-advisor: none,
   degree-subject: none,
@@ -51,6 +66,7 @@
   show heading.where(level: 1): it => [
     #pagebreak(weak: true)
     #set text(rgb("A51C30"), weight: "bold", size: 2em, hyphenate: false)
+    #set par(leading: 0.65em, justify: false)
     #set align(right)
     #if it.numbering != none {
       text(counter(heading).display(it.numbering), size: 3em)
@@ -71,6 +87,22 @@
   )
 
   set heading(numbering: sectionnumbering)
+
+  show link: this => {
+    if type(this.dest) != label {
+      text(this, fill: rgb(linkcolor.replace("\\#", "#")))
+    } else {
+      text(this, fill: rgb("#0000CC"))
+    }
+  }
+
+  show ref: this => {
+    text(this, fill: rgb("#640872"))
+  }
+
+  show cite.where(form: "prose"): this => {
+    text(this, fill: rgb("#640872"))
+  }
 
   page(
     [
@@ -262,10 +294,12 @@
           } else {
             prev_num = ch_num
             // needed to # properly (special 0 + appendix A)
-            ch_num = numbering(
-              chapter.numbering,
-              ch_num
-            )
+            if chapter.numbering != none {
+              ch_num = numbering(
+                chapter.numbering,
+                ch_num,
+              )
+            }
           }
           [
             #if ch_num != none {
@@ -298,6 +332,18 @@
   if list-of-figures != none and list-of-figures {
     ch-header("List of Figures", "list-fig")
 
+    show outline.entry: it => link(
+      it.element.location(),
+      it.indented(
+        it.prefix(),
+        [
+          #to-string(it.element.caption.body).split(".").first()
+          #box(width: 1fr, repeat(".", gap: 0.15em))
+          #it.page()
+        ],
+      ),
+    )
+
     outline(
       title: none,
       target: figure.where(kind: "quarto-float-fig"),
@@ -309,6 +355,18 @@
   // list of tables
   if list-of-tables != none and list-of-tables {
     ch-header("List of Tables", "list-tab")
+
+    show outline.entry: it => link(
+      it.element.location(),
+      it.indented(
+        it.prefix(),
+        [
+          #to-string(it.element.caption.body).split(".").first()
+          #box(width: 1fr, repeat(".", gap: 0.15em))
+          #it.page()
+        ],
+      ),
+    )
 
     outline(
       title: none,
@@ -349,6 +407,13 @@
 
 
   // The rest of the doc
+
+  set par(
+    justify: true,
+    first-line-indent: 1em,
+    leading: linestretch * 0.65em,
+  )
+
   set page(numbering: "1")
   counter(page).update(1)
 
@@ -363,14 +428,14 @@
 
 #let appendix(body) = {
   set heading(
-    numbering: "A",
-    supplement: [Appendix]
-    )
+    numbering: "A.1.1",
+    supplement: [Appendix],
+  )
   set figure(
     numbering: (..nums) => {
       "A" + numbering("1", ..nums.pos())
     },
-    supplement: [Appendix Figure]
+    supplement: [Appendix Figure],
   )
   counter(heading).update(0)
   counter(figure.where(kind: "quarto-float-fig")).update(0)
