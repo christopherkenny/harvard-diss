@@ -64,6 +64,9 @@
   )
 
   show heading.where(level: 1): it => [
+    #counter(figure.where(kind: "quarto-float-fig")).update(0)
+    #counter(figure.where(kind: "quarto-float-tbl")).update(0)
+
     #pagebreak(weak: true)
     #set text(rgb("A51C30"), weight: "bold", size: 2em, hyphenate: false)
     #set par(leading: 0.65em, justify: false)
@@ -428,6 +431,17 @@
 
   set page(numbering: "1")
   counter(page).update(1)
+
+  set figure(numbering: (..num) => {
+    context {
+      if heading.numbering != none {
+        numbering(
+          heading.numbering,
+          counter(heading).get().first(),
+        ) + "." + numbering("1", num.pos().first())
+      }
+    }
+  })
 
   if cols == 1 {
     doc
