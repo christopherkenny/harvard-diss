@@ -433,14 +433,11 @@
   counter(page).update(1)
 
   set figure(numbering: (..num) => {
-    context {
-      if heading.numbering != none {
-        numbering(
-          heading.numbering,
-          counter(heading).get().first(),
-        ) + "." + numbering("1", num.pos().first())
-      }
-    }
+    let n_head = counter(heading).get().first()
+    let number_head = query(
+      selector(heading).before(here())
+    ).last().numbering
+    numbering(number_head, n_head, num.pos().first())
   })
 
   if cols == 1 {
