@@ -48,6 +48,7 @@ You can learn more about creating custom Typst templates here:
 
 This should be within a level 2 heading.
 
+![A figure]({{< placeholder 400 200 format=svg >}}){#fig-example}
 
 ## Appendix for Chapter 1 {.appendix}
 
