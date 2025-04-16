@@ -274,7 +274,9 @@
 
         // Main content: level 1 + level 2
         let entries = query(
-          heading.where(level: 1, outlined: true).or(heading.where(level: 2, outlined: true)),
+          heading.where(level: 1, outlined: true).or(
+            heading.where(level: 2, outlined: true),
+          ),
         )
 
         let prev_chapter_num = -1
