@@ -53,3 +53,5 @@ This should be within a level 2 heading.
 ## Appendix for Chapter 1 {.appendix}
 
 Some text to supplement Chapter 1.
+
+![An appendix figure]({{< placeholder 400 200 format=svg >}}){#fig-appx-example}
