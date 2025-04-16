@@ -22,3 +22,5 @@ contributes:
       execute:
         echo: false
         warning: false
+      crossref:
+        sec-prefix: Chapter
