@@ -455,9 +455,9 @@
     supplement: [Appendix],
   )
   set figure(
-    numbering: (..nums) => {
-      "A" + numbering("1", ..nums.pos())
-    },
+    // numbering: (..nums) => {
+    //   "A" + numbering("1", ..nums.pos())
+    // },
     supplement: [Appendix Figure],
   )
   counter(heading).update(0)
