@@ -437,7 +437,7 @@
     let number_head = query(
       selector(heading).before(here())
     ).last().numbering
-    numbering(number_head, n_head, num.pos().first())
+    numbering(number_head, n_head) + "-" + str(num.pos().first())
   })
 
   if cols == 1 {
