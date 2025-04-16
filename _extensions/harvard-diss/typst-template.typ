@@ -256,67 +256,67 @@
           "List of Tables",
         )
 
+        // Front matter
         for i in array.range(custom_labels.len()) {
           let lbl = label(custom_labels.at(i))
-
-          // if a label isn't used, skip it.
-          // allows pieces to be missing (e.g. no abstract yet)
           if (query(lbl).len() == 0) {
             continue
           }
 
           let loc = locate(lbl)
-          // in typst > 0.13, this should be simplified
           let num = numbering("i", loc.page())
+
           link(
             loc,
-            [#smallcaps(custom_text.at(i)) #box(width: 1fr, repeat[.]) #num \ ]
+            [#smallcaps(custom_text.at(i)) #box(width: 1fr, repeat[.]) #num \ ],
           )
-
         }
 
-        let chapters = query(
-          heading.where(
-            level: 1,
-            outlined: true,
-          ),
+        // Main content: level 1 + level 2
+        let entries = query(
+          heading.where(level: 1, outlined: true).or(heading.where(level: 2, outlined: true)),
         )
 
-        let prev_num = -1
+        let prev_chapter_num = -1
 
-        for chapter in chapters {
-
-          let loc = chapter.location()
-          let num = numbering(
+        for entry in entries {
+          let loc = entry.location()
+          let level = entry.level
+          let page_num = numbering(
             loc.page-numbering(),
             ..counter(page).at(loc),
           )
 
-          let ch_num = counter(heading).at(loc).at(0)
-          if ch_num == prev_num {
-            ch_num = none
+          let entry_number = if entry.numbering != none {
+            numbering(entry.numbering, ..counter(heading).at(loc))
           } else {
-            prev_num = ch_num
-            // needed to # properly (special 0 + appendix A)
-            if chapter.numbering != none {
-              ch_num = numbering(
-                chapter.numbering,
-                ch_num,
-              )
+            none
+          }
+
+          let indent = if level == 2 {
+            h(1.5em)
+          } else {
+            none
+          }
+
+          let label = if level == 1 {
+            if entry_number != none {
+              str(entry_number) + "   " + smallcaps(entry.body)
+            } else {
+              smallcaps(entry.body)
+            }
+          } else {
+            if entry_number != none {
+              str(entry_number) + "   " + entry.body
+            } else {
+              entry.body
             }
           }
 
           link(
             loc,
-                      [
-            #if ch_num != none {
-              str(ch_num) + "   "
-            }
-            #smallcaps(chapter.body) #box(width: 1fr, repeat[.]) #num \
-          ]
-
+            indent + [#label #box(width: 1fr, repeat[.]) #page_num \ ],
           )
-
         }
       }
     ]

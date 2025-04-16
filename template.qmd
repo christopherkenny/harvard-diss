@@ -44,6 +44,10 @@ You can learn more about creating custom Typst templates here:
 
 <https://quarto.org/docs/prerelease/1.4/typst.html#custom-formats>
 
+### A subsection
+
+This should be within a level 2 heading.
+
 
 ## Appendix for Chapter 1 {.appendix}
 
