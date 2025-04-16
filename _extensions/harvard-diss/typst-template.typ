@@ -177,11 +177,15 @@
   }
 
   if abstract != none {
-    set page(header: [
-      Dissertation advisor: #dissertation-advisor
-      #h(1fr)
-      #authors.first().name
-    ])
+
+    place(
+      dy: -3em,
+      [
+        Dissertation advisor: #dissertation-advisor
+        #h(1fr)
+        #authors.first().name
+      ]
+    )
 
     set par(justify: false)
     align(center)[
