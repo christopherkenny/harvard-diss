@@ -1,9 +1,12 @@
-> [!WARNING]  
+> [!WARNING]
 > This extension may not be ready for wider use. I am currently using it for my own dissertation and it may change without warning.
 
 # `harvard-diss` Format
 
 This template provides a Typst-powered Quarto template to comply with Harvard's dissertation guidelines.
+
+<!-- pdftools::pdf_convert('template.pdf', pages = 1) -->
+![[template.qmd](template.qmd)](template_1.png)
 
 ## Installing
 
