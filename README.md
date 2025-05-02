@@ -23,7 +23,7 @@ Some options you can set:
 - `subtitle`: Your thesis's subtitle
 - `abstract`: The abstract for your thesis
 - `toc`: Whether to show a Table of Contents (default: `true`)
-- `copyright-text`: Copyright information to include after the title page, typically "© [year] [Author’s Name]. All rights reserved."
+- `copyright-text`: Copyright information to include after the title page. Leave empty to get the default of "© [year] [Author’s Name]. All rights reserved.". Place custom content to place that instead, for example if you're using a CC license.
 - `dissertation-advisor`: Name of the dissertation committee chair or co-chairs
 - `degree-subject`: Subject of the PhD to include (e.g., "Government")
 - `thanks`: Acknowledgements to include at the start of the thesis

@@ -57,6 +57,12 @@
   list-of-tables: none,
   doc,
 ) = {
+
+  if type(date) == content {
+    date = to-string(date)
+    date = str(date).split("-").map(int)
+    date = datetime(year: date.at(0), month: date.at(1), day: date.at(2))
+  }
   set page(
     paper: paper,
     margin: margin,
@@ -106,6 +112,22 @@
   show cite.where(form: "prose"): this => {
     text(this, fill: rgb("#640872"))
   }
+
+  // handle fig setup
+  show figure.caption: it => {
+    v(-1em)
+    align(left)[
+      #block(inset: 1em)[
+        #text(weight: "bold")[
+          #it.supplement
+          #context it.counter.display(it.numbering)
+        ]
+        #it.separator
+        #it.body
+      ]
+    ]
+  }
+
 
   page(
     [
@@ -171,6 +193,17 @@
         #set align(left + horizon)
         #set par(leading: 0.65em)
         #copyright<copyright>
+      ],
+      numbering: none,
+    )
+  } else {
+    page(
+      [
+        #set align(left + horizon)
+        #set par(leading: 0.65em)
+        © #date.display("[year]") #sym.dash.em
+        #authors.first().name.<copyright> \
+        All rights reserved.
       ],
       numbering: none,
     )

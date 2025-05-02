@@ -10,9 +10,9 @@ author:
         department: The Department of Government
         city: Cambridge, Massachusetts
 bibliography: bibliography.bib
-copyright-text: "© 2025 --- Christopher T. Kenny. All rights reserved."
 dissertation-advisor: "Professor Kosuke Imai"
 degree-subject: Government
+date: 2025-04-25
 abstract: |
   Write an abstract here which displays the contents that you want.
   More often than not, this will take a bit over a page.
@@ -29,31 +29,39 @@ epigraph-author: "Thomas Hofeller"
 list-figures: true
 list-tables: true
 previous-work: |
-  @sec-more-info is ...
+  @sec-more-info is ... (note here that you can use cross references like at the start of this line even though we are in the YAML)
 
   Chapter 2 is drawn from @mccartan2024redistricting.
 ---
 
 ## Introduction {.introduction}
 
-*TODO* Create an example file that demonstrates the formatting and features of your format.
+This is a template for Harvard GSAS theses.
+It follows the guidelines in <https://gsas.harvard.edu/policy/formatting-your-dissertation> and <https://gsas.harvard.edu/resource/dissertation-formatting-guidance>, as of 2025-05-01.
 
-## More Information {#sec-more-info}
+Read the readme for the full instructions for use.
 
-You can learn more about creating custom Typst templates here:
+## More Information on Chapters {#sec-more-info}
 
-<https://quarto.org/docs/prerelease/1.4/typst.html#custom-formats>
+Note that this is set up to call each "section" a chapter and so references look like @sec-more-info.
+
+I recommend using two `##` signs for chapters.
+In theory, you can use one `#` and it should detect this and work nicely.
+
+You likely want to use the include shortcodes to include your chapters.
+See <https://quarto.org/docs/authoring/includes.html> for a description of how to do exactly that.
+However, *all* references do need to be combined into one bibtex, hayagriva, or equivalent file currently.
 
 ### A subsection
 
 This should be within a level 2 heading.
 
-![A figure]({{< placeholder 400 200 format=svg >}}){#fig-example}
+![A figure. This follows the behavior of the first sentence being the short title/description, like in general science journals. The first sentence will be used to identify the figure in the TOC for figures, if enabled.]({{< placeholder 400 200 format=svg >}}){#fig-example}
 
 See @sec-more-info for more info.
 
-## Appendix for Chapter 1 {.appendix}
+## Appendix for Chapter 1 {.appendix #sec-app-1}
 
-Some text to supplement Chapter 1.
+Some text to supplement @sec-more-info.
 
 ![An appendix figure]({{< placeholder 400 200 format=svg >}}){#fig-appx-example}
