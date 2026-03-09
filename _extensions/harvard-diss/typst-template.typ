@@ -55,6 +55,7 @@
   epigraph-author: none,
   list-of-figures: none,
   list-of-tables: none,
+  blinded: false,
   doc,
 ) = {
 
@@ -147,7 +148,7 @@
 
       #v(4fr)
 
-      #if authors != none {
+      #if authors != none and not blinded {
         upper("A dissertation presented")
         linebreak()
         upper("by")
@@ -196,6 +197,17 @@
       ],
       numbering: none,
     )
+  } else if blinded {
+    page(
+      [
+        #set align(left + horizon)
+        #set par(leading: 0.65em)
+        © #date.display("[year]") #sym.dash.em
+        \[BLINDED\]<copyright> \
+        All rights reserved.
+      ],
+      numbering: none,
+    )
   } else {
     page(
       [
@@ -211,14 +223,16 @@
 
   if abstract != none {
 
-    place(
-      dy: -3em,
-      [
-        Dissertation advisor: #dissertation-advisor
-        #h(1fr)
-        #authors.first().name
-      ]
-    )
+    if not blinded {
+      place(
+        dy: -3em,
+        [
+          Dissertation advisor: #dissertation-advisor
+          #h(1fr)
+          #authors.first().name
+        ]
+      )
+    }
 
     set par(justify: false)
     align(center)[
@@ -368,13 +382,13 @@
 
   // FRONTMATTER ----
   // citations to previous work
-  if previous-work != none {
+  if previous-work != none and not blinded {
     ch-header("Citations to Previous Work", "prev-work")
     previous-work
     pagebreak()
   }
   // acknowledgements "thanks"
-  if thanks != none {
+  if thanks != none and not blinded {
     ch-header("Acknowledgements", "thanks")
     thanks
     pagebreak()
@@ -448,7 +462,7 @@
   }
 
   // dedication
-  if dedication != none {
+  if dedication != none and not blinded {
     ch-header("Dedication", "dedication")
 
     show text: emph

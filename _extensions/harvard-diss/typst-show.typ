@@ -100,5 +100,8 @@ $endif$
 $if(list-tables)$
   list-of-tables: $list-tables$,
 $endif$
+$if(blinded)$
+  blinded: $blinded$,
+$endif$
   doc,
 )
